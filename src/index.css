@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Professional Portfolio - Dark Navy + Purple Theme */
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 210 40% 96%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 20% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 270 70% 60%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 220 20% 14%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 270 70% 60%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 185 70% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 20% 5%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 270 70% 60%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 220 20% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 185 70% 50%;
+
+    /* Cyber theme colors */
+    --cyan: 185 70% 50%;
+    --pink: 330 80% 60%;
+    --navy: 220 20% 7%;
+    --navy-light: 220 20% 10%;
+    --navy-lighter: 220 20% 14%;
+    --purple: 270 70% 60%;
+    --purple-glow: 270 80% 70%;
+    --purple-dark: 270 50% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  /* Typing cursor animation - Cyber style */
+  .typing-cursor::after {
+    content: '▊';
+    animation: blink 0.8s step-end infinite;
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary));
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  /* Gradient text - Cyber */
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  /* Glitch effect */
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    animation: glitch-1 2s infinite linear alternate-reverse;
+    color: hsl(var(--cyan));
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  }
+
+  .glitch::after {
+    animation: glitch-2 3s infinite linear alternate-reverse;
+    color: hsl(var(--pink));
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  }
+
+  @keyframes glitch-1 {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-3px); }
+    40% { transform: translateX(3px); }
+    60% { transform: translateX(-1px); }
+    80% { transform: translateX(2px); }
+  }
+
+  @keyframes glitch-2 {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(3px); }
+    40% { transform: translateX(-2px); }
+    60% { transform: translateX(2px); }
+    80% { transform: translateX(-3px); }
+  }
+
+  /* Cyber glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px hsl(var(--cyan) / 0.4), 0 0 40px hsl(var(--cyan) / 0.2), inset 0 0 20px hsl(var(--cyan) / 0.1);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 20px hsl(var(--pink) / 0.4), 0 0 40px hsl(var(--pink) / 0.2);
+  }
+
+  .glow-hover:hover {
+    box-shadow: 0 0 30px hsl(var(--cyan) / 0.5), 0 0 60px hsl(var(--primary) / 0.3);
+  }
+
+  /* Scan line effect */
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--cyan)), transparent);
+    animation: scan 3s ease-in-out infinite;
+  }
+
+  @keyframes scan {
+    0%, 100% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; }
+  }
+
+  /* Matrix rain background */
+  .matrix-bg {
+    background-image: 
+      radial-gradient(ellipse at top, hsl(var(--primary) / 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom, hsl(var(--cyan) / 0.1) 0%, transparent 50%);
+  }
+
+  /* Terminal box */
+  .terminal-box {
+    @apply bg-background/80 border border-cyan/30 rounded-lg;
+    box-shadow: 0 0 20px hsl(var(--cyan) / 0.1), inset 0 0 30px hsl(var(--background) / 0.5);
+  }
+
+  /* Card hover lift - Cyber */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 20px 40px hsl(var(--cyan) / 0.15), 0 0 30px hsl(var(--primary) / 0.1);
+  }
+
+  /* Cyber border animation */
+  .cyber-border {
+    position: relative;
+  }
+
+  .cyber-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, hsl(var(--cyan)), hsl(var(--primary)), hsl(var(--pink)), hsl(var(--cyan)));
+    background-size: 300% 100%;
+    animation: border-flow 4s linear infinite;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .cyber-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Floating animation */
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+  }
+
+  /* Pulse ring - Cyber */
+  .pulse-ring {
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 0 0 hsl(var(--cyan) / 0.5);
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+      box-shadow: 0 0 0 20px hsl(var(--cyan) / 0);
+    }
+  }
+
+  @keyframes border-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  /* Text flicker */
+  .flicker {
+    animation: flicker 3s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    95% { opacity: 0.9; }
+    96% { opacity: 1; }
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  /* Grid pattern overlay */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(hsl(var(--cyan) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--cyan) / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
